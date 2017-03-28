@@ -1,31 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:aop="http://www.springframework.org/schema/aop" 
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context 
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc 
-       http://www.springframework.org/schema/mvc/spring-mvc.xsd
-       http://www.springframework.org/schema/aop 
-	   http://www.springframework.org/schema/aop/spring-aop.xsd">
-	
-	<!-- <aop:aspectj-autoproxy/> -->
-	
-	<aop:config>
-		<aop:aspect ref="logAspect">
-			<aop:pointcut id="aopLogAspect" expression="execution(* com.zf.controller..*.*(..))" />
-			<aop:around pointcut-ref="aopLogAspect" method="log"/>
-		</aop:aspect>
-	</aop:config>
-	
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    
     <context:component-scan base-package="com.zf" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
-
+	
     <bean id="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">
         <!-- Default charset -->
         <property name="charset" value="UTF-8"/>
@@ -56,21 +44,23 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-    
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
-    
-    <mvc:interceptors>
+	
+	<mvc:resources mapping="/resources/**" location="/resources/"/>
+	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/" />
+			<mvc:exclude-mapping path="/login" />
 			<mvc:exclude-mapping path="/resources/**" />	
-			<bean class="com.zf.interceptor.HttpRequestInterceptor" />
+			<bean class="com.zf.interceptor.DemoInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-    
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	    <!-- 配置jsp文件的前缀和后缀，在编写handler时可以简化书写-->
 	    <property name="prefix" value="/WEB-INF/jsp/"/>
 	    <property name="suffix" value=".jsp"/>
 	</bean>
-
+	
 </beans>

@@ -9,14 +9,9 @@
     	<%@ include file="/WEB-INF/jsp/common/resource.jspf"%>
         <title>测试系统</title>
     </head>
-    <script type="text/javascript">
-    	setInterval('showtime("showtime")',1000);
-    </script>
     <body>
-        <span>${time}</span>
-        <span id="showtime"></span>
-        <br>
-        <span><c:out value="${data}"></c:out></span>
+    	<div><a href="${ctx}/logout">退出</a></div>
+    	<div>welcome ${username} to the platform!</div>
     </body>
 </html>
 

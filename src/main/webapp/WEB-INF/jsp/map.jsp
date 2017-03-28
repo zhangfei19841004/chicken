@@ -7,16 +7,21 @@
     <head>
     	<%@ include file="/WEB-INF/jsp/common/meta.jsp"%>
     	<%@ include file="/WEB-INF/jsp/common/resource.jspf"%>
+    	<style type="text/css">
+    		.td{width:80px;}
+    	</style>
         <title>测试系统</title>
     </head>
-    <script type="text/javascript">
-    	setInterval('showtime("showtime")',1000);
-    </script>
     <body>
-        <span>${time}</span>
-        <span id="showtime"></span>
-        <br>
-        <span><c:out value="${data}"></c:out></span>
+        <table border="1">
+        	<c:forEach items="${map}" var="item" varStatus="status">
+        		<tr>
+        			<td class="td">${status.count}</td>
+        			<td class="td"><c:out value="${item.key}"/></td>
+        			<td class="td"><c:out value="${item.value}"/></td>
+        		</tr>
+        	</c:forEach>
+        </table>
     </body>
 </html>
 

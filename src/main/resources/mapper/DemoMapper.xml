@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.zf.dao.mapper.DemoMapper"> 
+    <resultMap type="com.zf.dao.domain.Demo" id="demo">  
+        <id column="id" property="id" />  
+        <result column="name" property="name" />  
+        <result column="mobile" property="mobile" />  
+        <result column="age" property="age" />  
+    </resultMap> 
+	
+	<!-- <select id="getRoleByName" resultMap="AccessRoleInfo">
+		select
+			*
+		from
+			ott_access_role
+		where
+			is_deleted = 0 
+			and
+			role = #{role}
+	</select> -->
+	
+	<insert id="add">
+		insert into demo (name,mobile,age)
+		values(#{name}, #{mobile}, #{age})
+	</insert>
+	
+	<!-- <update id="updateRole">
+		update 
+			ott_access_role
+		set
+			role = #{accessRoleInfo.role},
+			update_user = #{accessRoleInfo.updateUser},
+			update_time = now()
+		where
+			id = #{accessRoleInfo.id}
+	</update>
+	
+	
+	<delete id="deleteMenuRoleRef">
+		delete from ott_access_role_menu_ref
+	</delete> -->
+	
+</mapper> 
